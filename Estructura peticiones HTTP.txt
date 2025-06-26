@@ -1,0 +1,243 @@
+
+Farmacias:
+- GET, obtener todas las farmacias: http://localhost:8080/api/farmacias
+- GET, obtener farmacia por id: http://localhost:8080/api/farmacias/1
+- POST, crear farmacia: http://localhost:8080/api/farmacias
+{
+    "nombre": "Farmacia Cruz Verde",
+    "lugar": "Gran Avenida 14"
+}
+- PUT, update de farmacia segun id: http://localhost:8080/api/farmacias/1
+{
+    "nombre": "Farmacia Cruz Verde",
+    "lugar": "Gran Avenida 14"
+}
+- DELETE, eliminar farmcia segun id: http://localhost:8080/api/farmacias/1
+- GET, contar farmacias: http://localhost:8080/api/farmacias/contar
+
+
+
+
+
+Usuarios:
+- GET, obtener todos los usuarios: http://localhost:8080/api/usuarios
+- GET, obtener usuario por id: http://localhost:8080/api/usuarios/2
+- POST, crear usuario (no crea registro en la tabla del rol, esto se hace manualmente): http://localhost:8080/api/usuarios
+{
+    "rut": "19345678-9",
+    "nombre": "Pipa",
+    "apellido": "Iguain",
+    "email": "igain@gmail.com",
+    "password": "$2a$10$N9qo8uLOickgx2ZMRZoMy...",
+    "telefono": "+56916543678",
+    "tipo": "CLIENTE"
+}
+- PUT, update de usuario según id: http://localhost:8080/api/usuarios/19
+{
+    "rut": "19345678-9",
+    "nombre": "Pipa",
+    "apellido": "Iguaincito",
+    "email": "igain@gmail.com",
+    "password": "$2a$10$N9qo8uLOickgx2ZMRZoMy...",
+    "telefono": "+56916543678",
+    "tipo": "CLIENTE"
+}
+- DELETE, eliminar usuario según id: http://localhost:8080/api/usuarios/19
+Se elimina automáticamente el registro de la tabla del rol que tenia, es decir, si se elimina un usuario cliente, este se elimina de la tabla Clientes.
+- GET, contar usuarios: http://localhost:8080/api/usuarios/contar
+
+
+
+
+
+Clientes:
+- GET, obtener todos los clientes: http://localhost:8080/api/clientes
+- GET, obtener cliente por id: http://localhost:8080/api/clientes/2
+- POST, crear cliente: http://localhost:8080/api/clientes
+{
+    "usuario_id": 19,
+    "direccion": "Baires 1123"
+}
+// se indica la id del usuario de tipo cliente
+- PUT, update de cliente según id: http://localhost:8080/api/clientes/10
+{
+    "direccion": "Baires 13"
+}
+- DELETE, eliminar registro de cliente (no elimina usuario): http://localhost:8080/api/clientes/10
+- GET, cliente con mayor gasto en pedidos entregados: http://localhost:8080/api/clientes/cliente-mayor-gasto
+
+
+
+
+
+Repartidor:
+- GET, obtener todos los repartidores: http://localhost:8080/api/repartidores
+- GET, obtener repartidor según id: http://localhost:8080/api/repartidores/2
+- POST, crear repartidor:  http://localhost:8080/api/repartidores
+{
+    "usuario_id": 19,
+    "tipo_vehiculo": "MOTO"
+}
+- PUT, actualizar repartidor: http://localhost:8080/api/repartidores/6
+{
+    "tipo_vehiculo": "AUTO"
+}
+- DELETE, eliminar repartidor (no elimina usuario): http://localhost:8080/api/repartidores/6
+
+
+
+
+
+Administradores:
+- GET, obtener todos los admins: http://localhost:8080/api/administradores
+- GET, obtener admin segun id: http://localhost:8080/api/administradores/2
+- POST, crear admin: http://localhost:8080/api/administradores
+{
+    "usuario_id": 17,
+    "nivel_acceso": 3,
+    "departamento": "Operaciones"
+}
+- PUT, update de admin: http://localhost:8080/api/administradores/17
+{
+    "nivel_acceso": 3,
+    "departamento": "Operaciones"
+}
+- DELETE, eliminar admin (no elimina usuario): http://localhost:8080/api/administradores/17
+
+
+
+
+
+Medio de Pago:
+- GET, obtener todos los medio de pago: http://localhost:8080/api/medios_de_pago
+- GET, obtener medio de pago según id: http://localhost:8080/api/medios_de_pago/2
+- POST, crear medio de pago: http://localhost:8080/api/medios_de_pago
+{
+    "tipo": "Tarjeta RedCompra"
+}
+- PUT, actualizar medio de pago según id: http://localhost:8080/api/medios_de_pago/3
+{
+    "tipo": "Tarjeta RedCompra PLUS"
+}
+- DELETE, eliminar medio de pago: http://localhost:8080/api/medios_de_pago/4
+
+
+
+
+
+Calificaciones:
+- GET, obtener todos las calificaciones: http://localhost:8080/api/calificaciones
+- GET, obtener calificación por id: http://localhost:8080/api/calificaciones/2
+- POST, crear calificación: http://localhost:8080/api/calificaciones
+{
+    "puntuacion": "Buena atencion",
+    "estrellas": 5,
+    "cliente_id": 1,
+    "repartidor_id": 1
+}
+- PUT, actualizar calificación:  http://localhost:8080/api/calificaciones/25
+{
+    "puntuacion": "Buena atencion",
+    "estrellas": 4,
+    "cliente_id": 1,
+    "repartidor_id": 1
+}
+- DELETE, eliminar calificación: http://localhost:8080/api/calificaciones/25
+
+
+
+
+
+Productos:
+- GET, obtener todos los productos: http://localhost:8080/api/productos
+- GET, obtener producto según id: http://localhost:8080/api/productos/2
+- POST, crear producto:  http://localhost:8080/api/productos
+{
+    "nombre": "Neopren",
+    "precio": 9990,
+    "stock": 3,
+    "requiere_receta": false
+}
+- PUT, actualizar producto: http://localhost:8080/api/productos/25
+{
+    "nombre": "Neopren",
+    "precio": 13990,
+    "stock": 10,
+    "requiere_receta": false
+}
+- DELETE, eliminar producto: http://localhost:8080/api/productos/25
+- GET, contar productos: http://localhost:8080/api/productos/contar
+- GET, ranking productos devueltos: http://localhost:8080/api/productos/top-productos-devueltos
+- GET, ranking productos cancelados: http://localhost:8080/api/productos/top-productos-cancelados
+
+
+
+
+
+Pedidos:
+- GET, obtener todos los pedidos: http://localhost:8080/api/pedidos
+- GET, obtener pedido según id: http://localhost:8080/api/pedidos/2
+- GET, obtener el tiempo promedio de entrega de los repartidores: http://localhost:8080/api/pedidos/tiempo-promedio-repartidor
+- POST, crear pedido: http://localhost:8080/api/pedidos
+{
+    "fecha": "2025-05-01",
+    "urgencia": false,
+    "total_pagado": 21200,
+    "estado_entrega": "Entregado",
+    "fecha_entrega": "2025-05-03",
+    "cliente_id": 1,
+    "medio_pago_id": 1,
+    "farmacia_id": 1,
+    "repartidor_id": 1
+}
+- PUT, actualizar pedido: http://localhost:8080/api/pedidos/21
+{
+    "fecha": "2025-05-01",
+    "urgencia": false,
+    "total_pagado": 21200,
+    "estado_entrega": "Entregado",
+    "fecha_entrega": "2025-05-10",
+    "cliente_id": 1,
+    "medio_pago_id": 1,
+    "farmacia_id": 1,
+    "repartidor_id": 1
+}
+- DELETE, eliminar pedido: http://localhost:8080/api/pedidos/21
+- POST, cambiar estado de pedido (procedimiento): http://localhost:8080/api/pedidos/4/cambiar-estado?nuevoEstado=Fallido
+- GET, contar pedidos segun mes actual: http://localhost:8080/api/pedidos/contar-mes
+
+
+
+
+Farmacia Productos:
+- GET, obtener todos: http://localhost:8080/api/farmacias_productos
+- GET, obtener según ambas id: http://localhost:8080/api/farmacias_productos/farmacia/1/producto/1
+- POST, crear: http://localhost:8080/api/farmacias_productos
+{
+    "farmacia_id": 3,
+    "producto_id": 8
+}
+- (Al ser tabla intermedia con solo llave compuesta, no es necesario update)
+- DELETE, eliminar: http://localhost:8080/api/farmacias_productos/farmacia/3/producto/8
+
+
+
+
+
+Detalles De Pedido:
+- GET, obtener todos los detalles: http://localhost:8080/api/detalle_pedidos
+- GET, obtener detalle según id: http://localhost:8080/api/detalle_pedidos/2
+- POST, crear detalle: http://localhost:8080/api/detalle_pedidos
+- POST, detalle: http://localhost:8080/api/detalle_pedidos/detalle
+{
+    "pedido_id": 19,
+    "producto_id": 11,
+    "cantidad": 2
+}
+- PUT, actualizar detalle: http://localhost:8080/api/detalle_pedidos/28
+{
+    "pedido_id": 19,
+    "producto_id": 11,
+    "cantidad": 4
+}
+- DELETE, eliminar detalle: http://localhost:8080/api/detalle_pedidos/28
