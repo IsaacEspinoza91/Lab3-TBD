@@ -1,0 +1,36 @@
+[
+    {
+        "pedido_id": "P001",
+        "eventos": [
+            {
+                "estado": "creado",
+                "timestamp": "2025-03-20T09:00:00Z"
+            },
+            {
+                "estado": "en preparación",
+                "timestamp": "2025-03-20T09:15:00Z"
+            },
+            {
+                "estado": "en reparto",
+                "timestamp": "2025-03-20T09:45:00Z"
+            },
+            {
+                "estado": "entregado",
+                "timestamp": "2025-03-20T10:10:00Z"
+            }
+        ]
+    },
+    {
+        "pedido_id": "P002",
+        "eventos": [
+            {
+                "estado": "creado",
+                "timestamp": "2025-03-21T13:00:00Z"
+            },
+            {
+                "estado": "cancelado",
+                "timestamp": "2025-03-21T13:20:00Z"
+            }
+        ]
+    }
+]

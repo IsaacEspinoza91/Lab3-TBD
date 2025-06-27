@@ -1,0 +1,17 @@
+[
+    {
+        "cliente_id": "C001",
+        "eventos": [
+            {
+                "tipo": "busqueda",
+                "valor": "paracetamol",
+                "timestamp": "2025-03-20T09:05:00Z"
+            },
+            {
+                "tipo": "click",
+                "valor": "producto_123",
+                "timestamp": "2025-03-20T09:06:00Z"
+            }
+        ]
+    }
+]
