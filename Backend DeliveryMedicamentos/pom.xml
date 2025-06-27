@@ -29,6 +29,7 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 
 		<!-- Spring Boot Starter Web -->
@@ -51,11 +52,11 @@
 		</dependency>
 
 		<!-- Spring Security test
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>-->
 
 		<!-- Base de datos PostgreSQL -->
 		<dependency>
@@ -95,7 +96,14 @@
 			<artifactId>spring-tx</artifactId>
 		</dependency>
 
+		<!-- MongoDB Spring Data -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+
 	</dependencies>
+
 
 	<build>
 		<plugins>
