@@ -1,22 +1,22 @@
 package com.tbd.DeliveryMedicamentos.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @Document(collection = "opiniones_clientes")
 public class opiniones_clientesEntity {
 
-    @JsonProperty("cliente_id")
+    @Field("cliente_id")
     private String clienteId;
 
-    @JsonProperty("empresa_id")
+    @Field("empresa_id")
     private String empresaId;
 
     private String comentario;
     private int puntuacion;
-    private String fecha;
+    private LocalDateTime fecha;
 
     // Getters y Setters
     public String getClienteId() {
@@ -51,11 +51,11 @@ public class opiniones_clientesEntity {
         this.puntuacion = puntuacion;
     }
 
-    public String getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 }

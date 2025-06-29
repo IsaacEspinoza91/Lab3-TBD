@@ -4,19 +4,19 @@
         "eventos": [
             {
                 "estado": "creado",
-                "timestamp": "2025-03-20T09:00:00Z"
+                "timestamp": "2025-03-20T09:00:00"
             },
             {
                 "estado": "en preparación",
-                "timestamp": "2025-03-20T09:15:00Z"
+                "timestamp": "2025-03-20T09:15:00"
             },
             {
                 "estado": "en reparto",
-                "timestamp": "2025-03-20T09:45:00Z"
+                "timestamp": "2025-03-20T09:45:00"
             },
             {
                 "estado": "entregado",
-                "timestamp": "2025-03-20T10:10:00Z"
+                "timestamp": "2025-03-20T10:10:00"
             }
         ]
     },
@@ -25,11 +25,11 @@
         "eventos": [
             {
                 "estado": "creado",
-                "timestamp": "2025-03-21T13:00:00Z"
+                "timestamp": "2025-03-21T13:00:00"
             },
             {
                 "estado": "cancelado",
-                "timestamp": "2025-03-21T13:20:00Z"
+                "timestamp": "2025-03-21T13:20:00"
             }
         ]
     }

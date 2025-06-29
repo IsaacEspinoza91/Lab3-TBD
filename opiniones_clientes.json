@@ -4,13 +4,13 @@
         "empresa_id": "E001",
         "comentario": "Excelente servicio, rápido y seguro.",
         "puntuacion": 5,
-        "fecha": "2025-03-20T10:15:00Z"
+        "fecha": "2025-03-20T10:15:00"
     },
     {
         "cliente_id": "C002",
         "empresa_id": "E002",
         "comentario": "Demora en la entrega y mal embalaje.",
         "puntuacion": 2,
-        "fecha": "2025-03-21T14:22:00Z"
+        "fecha": "2025-03-21T14:22:00"
     }
 ]
