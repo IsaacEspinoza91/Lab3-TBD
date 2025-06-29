@@ -1,6 +1,7 @@
 package com.tbd.DeliveryMedicamentos.repositories;
 
 import com.tbd.DeliveryMedicamentos.DTO.OpinionesPorHoraDTO;
+import com.tbd.DeliveryMedicamentos.DTO.PromedioPuntuacionPorEmpresaDTO;
 import com.tbd.DeliveryMedicamentos.entities.opiniones_clientesEntity;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -35,5 +36,16 @@ public interface opiniones_clientesRepository extends MongoRepository<opiniones_
             "{ '$sort': { 'hora': 1 } }"
     })
     List<OpinionesPorHoraDTO> agruparOpinionesPorHora();
+
+    // Consulta 1: Obtener el promedio de puntuación por empresa
+    @Aggregation(pipeline = {
+            "{ '$match': { 'empresa_id': { '$ne': null, '$exists': true } } }",
+            "{ '$group': { " +
+                    "    '_id': '$empresa_id', " +
+                    "    'promedioPuntuacion': { '$avg': '$puntuacion' } " +
+                    "} }"
+    })
+    List<PromedioPuntuacionPorEmpresaDTO> obtenerPromedioPuntuacionPorEmpresa();
 }
+
 

@@ -1,6 +1,7 @@
 package com.tbd.DeliveryMedicamentos.services;
 
 import com.tbd.DeliveryMedicamentos.DTO.OpinionesPorHoraDTO;
+import com.tbd.DeliveryMedicamentos.DTO.PromedioPuntuacionPorEmpresaDTO;
 import com.tbd.DeliveryMedicamentos.entities.opiniones_clientesEntity;
 import com.tbd.DeliveryMedicamentos.repositories.opiniones_clientesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ public class opiniones_clientesService {
     // Consulta 6. Agrupar opiniones por hora
     public List<OpinionesPorHoraDTO> analizarPatronesPorHora() {
         return repository.agruparOpinionesPorHora();
+    }
+
+    //Consulta 1: Obtener el promedio de puntuación por empresa
+    public List<PromedioPuntuacionPorEmpresaDTO> obtenerPromedioPuntuacionPorEmpresa() {
+        return repository.obtenerPromedioPuntuacionPorEmpresa();
     }
 }
