@@ -1,5 +1,6 @@
 package com.tbd.DeliveryMedicamentos.controllers;
 
+import com.tbd.DeliveryMedicamentos.DTO.OpinionesPorHoraDTO;
 import com.tbd.DeliveryMedicamentos.entities.opiniones_clientesEntity;
 import com.tbd.DeliveryMedicamentos.services.opiniones_clientesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,10 @@ public class opiniones_clientesController {
     @GetMapping("/empresa/{empresaId}")
     public List<opiniones_clientesEntity > obtenerPorEmpresa(@PathVariable String empresaId) {
         return service.obtenerPorEmpresa(empresaId);
+    }
+
+    @GetMapping("/por_hora")
+    public List<OpinionesPorHoraDTO> getOpinionesPorHora() {
+        return service.analizarPatronesPorHora();
     }
 }
