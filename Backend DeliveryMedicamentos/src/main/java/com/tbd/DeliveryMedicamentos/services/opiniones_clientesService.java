@@ -30,6 +30,12 @@ public class opiniones_clientesService {
         return repository.findAll();
     }
 
+    // Buscar opiniones por palabras clave en el comentario
+    public List<opiniones_clientesEntity> buscarPorPalabraClave(String palabraClave) {
+        String regex = ".*" + palabraClave + ".*";  // patrón flexible
+        return repository.buscarPorComentarioInsensitive(regex);
+    }
+
     // Obtener opiniones por cliente
     public List<opiniones_clientesEntity > obtenerPorCliente(String clienteId) {
         return repository.findByClienteId(clienteId);

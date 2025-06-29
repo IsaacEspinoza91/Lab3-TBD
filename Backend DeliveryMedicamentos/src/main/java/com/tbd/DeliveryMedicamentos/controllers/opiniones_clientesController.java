@@ -29,6 +29,12 @@ public class opiniones_clientesController {
         return service.obtenerTodas();
     }
 
+    // Endpoint para buscar opiniones por palabras clave
+    @GetMapping("/buscar/{keyword}")
+    public List<opiniones_clientesEntity> buscarPorPalabraClave(@PathVariable String keyword) {
+        return service.buscarPorPalabraClave(keyword);
+    }
+
     @GetMapping("/cliente/{clienteId}")
     public List<opiniones_clientesEntity > obtenerPorCliente(@PathVariable String clienteId) {
         return service.obtenerPorCliente(clienteId);
