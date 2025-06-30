@@ -85,9 +85,15 @@ de mongoDB:
 
 Inicializar el servicio MongoDB en una terminal CMD con el comando:
 
+```bash
 > mongod
+```
+```bash
 > use delivery-med-mongo
+```
+```bash
 > db.myCollection.insertOne({ name: "example" })
+```
 
 ## 2. Poblar la base de datos
 
