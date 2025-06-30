@@ -2,6 +2,7 @@
     <nav class="admin-navbar">
         <router-link to="/admin" class="nav-link">Delivery Medicamentos</router-link>
         <div class="admin-nav-links">
+            <router-link to="/admin/lab3" class="nav-link">Lab3</router-link>
             <router-link to="/admin/usuarios" class="nav-link">Usuarios</router-link>
             <router-link to="/admin/clientes" class="nav-link">Clientes</router-link>
             <router-link to="/admin/repartidores" class="nav-link">Repartidores</router-link>

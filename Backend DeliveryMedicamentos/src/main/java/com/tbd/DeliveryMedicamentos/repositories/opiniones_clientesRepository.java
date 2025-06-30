@@ -22,10 +22,13 @@ public interface opiniones_clientesRepository extends MongoRepository<opiniones_
 
     // Consulta 6: Agrupar opiniones por hora segun puntacion
     @Aggregation(pipeline = {
+            "{ '$match': { 'fecha': { '$exists': true } } }",
+            "{ '$addFields': { 'convertedFecha': { '$toDate': '$fecha' } } }",
+            "{ '$match': { 'convertedFecha': { '$ne': null } } }",
             "{ '$group': { " +
-                    "    '_id': { '$hour': '$fecha' }, " +
+                    "    '_id': { '$hour': '$convertedFecha' }, " +
                     "    'promedioPuntuacion': { '$avg': '$puntuacion' }, " +
-                    "    'totalOpiniones': { '$sum': 1 } " +
+                    "    'totalOpiniones': { '$sum': 1 }" +
                     "} }",
             "{ '$project': { " +
                     "    'hora': '$_id', " +
@@ -36,6 +39,7 @@ public interface opiniones_clientesRepository extends MongoRepository<opiniones_
             "{ '$sort': { 'hora': 1 } }"
     })
     List<OpinionesPorHoraDTO> agruparOpinionesPorHora();
+
 
     // Consulta 1: Obtener el promedio de puntuación por empresa
     @Aggregation(pipeline = {

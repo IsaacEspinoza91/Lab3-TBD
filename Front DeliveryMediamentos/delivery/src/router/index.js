@@ -9,6 +9,7 @@ const RegisterView2 = () => import('@/views/Auth/RegisterView.vue')
 // Vistas de administración
 const AdminView = () => import('@/views/AdminView.vue')
 const AdminDashboard = () => import('@/views/admin/DashboardView.vue')
+const Lab3View = () => import('@/views/admin/Lab3View.vue')
 const UsuariosView = () => import('@/views/admin/UsuariosView.vue')
 const ClientesView = () => import('@/views/admin/ClientesView.vue')
 const RepartidoresView = () => import('@/views/admin/RepartidoresView.vue')
@@ -87,6 +88,11 @@ const router = createRouter({
                     path: 'calificaciones',
                     name: 'admin-calificaciones',
                     component: CalificacionesView
+                },
+                {
+                    path: '/admin/lab3',
+                    name: 'AdminLab3',
+                    component: Lab3View
                 }
             ]
         }
