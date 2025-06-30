@@ -1,22 +1,32 @@
 package com.tbd.DeliveryMedicamentos.entities;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import java.util.List;
 
 @Document(collection = "logs_pedidos")
 public class logs_pedidosEntity {
 
-    private String pedido_id;
+    @Id
+    private String _id;
+
+    @Field("pedido_id")
+    private String pedidoId;
     private List<EventoEntity> eventos;
 
-    public logs_pedidosEntity(String pedido_id, List<EventoEntity> eventos) {
-        this.pedido_id = pedido_id;
+    public logs_pedidosEntity() {
+    }
+
+    public logs_pedidosEntity(String pedidoId, List<EventoEntity> eventos) {
+        this.pedidoId = pedidoId;
         this.eventos = eventos;
     }
 
     // Getters y Setters
-    public String getPedido_id() { return pedido_id; }
-    public void setPedido_id(String pedido_id) { this.pedido_id = pedido_id; }
+    public String getPedidoId() { return pedidoId; }
+    public void setPedido_id(String pedido_id) { this.pedidoId = pedido_id; }
 
     public List<EventoEntity> getEventos() { return eventos; }
     public void setEventos(List<EventoEntity> eventos) { this.eventos = eventos; }

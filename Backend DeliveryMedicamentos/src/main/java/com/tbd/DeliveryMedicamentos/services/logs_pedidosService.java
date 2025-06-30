@@ -18,6 +18,11 @@ public class logs_pedidosService {
         this.repository = repository;
     }
 
+    // llamada a consulta 3
+    public List<String> obtenerPedidosConMasDe3CambiosEn10Min() {
+        return repository.findPedidosConMasDe3CambiosEn10Min();
+    }
+
     public logs_pedidosEntity crearLog(logs_pedidosEntity log) {
         return repository.save(log);
     }
@@ -28,6 +33,10 @@ public class logs_pedidosService {
 
     public Optional<logs_pedidosEntity> obtenerPorId(String id) {
         return repository.findById(id);
+    }
+
+    public List<logs_pedidosEntity> obtenerPorPedidoId(String pedidoId) {
+        return repository.findByPedidoId(pedidoId);
     }
 
     public void eliminarPorId(String id) {

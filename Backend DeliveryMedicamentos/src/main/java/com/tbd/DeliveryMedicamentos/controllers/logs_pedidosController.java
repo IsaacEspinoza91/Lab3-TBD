@@ -34,6 +34,11 @@ public class logs_pedidosController {
         return service.obtenerPorId(id);
     }
 
+    @GetMapping("/pedido/{pedidoId}")
+    public List<logs_pedidosEntity> obtenerPorPedidoId(@PathVariable String pedidoId) {
+        return service.obtenerPorPedidoId(pedidoId);
+    }
+
     @PutMapping("/{id}")
     public logs_pedidosEntity actualizar(@PathVariable String id, @RequestBody logs_pedidosEntity log) {
         return service.actualizarLog(id, log);
@@ -42,5 +47,10 @@ public class logs_pedidosController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable String id) {
         service.eliminarPorId(id);
+    }
+
+    @GetMapping("/pedidos-cambiantes")
+    public List<String> obtenerPedidosConMasDe3CambiosEn10Min() {
+        return service.obtenerPedidosConMasDe3CambiosEn10Min();
     }
 }
