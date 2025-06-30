@@ -2,6 +2,7 @@ package com.tbd.DeliveryMedicamentos.controllers;
 
 import com.tbd.DeliveryMedicamentos.entities.historial_repartidoresEntity;
 import com.tbd.DeliveryMedicamentos.services.historial_repartidoresService;
+import com.tbd.DeliveryMedicamentos.DTO.RutaFrecuenteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,5 +43,10 @@ public class historial_repartidoresController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable String id) {
         service.eliminarPorId(id);
+    }
+
+    @GetMapping("/rutas-frecuentes")
+    public List<RutaFrecuenteDTO> obtenerRutasFrecuentesUltimos7Dias() {
+        return service.obtenerRutasFrecuentesUltimos7Dias();
     }
 }

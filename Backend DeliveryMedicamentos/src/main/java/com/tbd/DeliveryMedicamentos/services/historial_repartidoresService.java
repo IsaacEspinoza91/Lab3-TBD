@@ -2,6 +2,7 @@ package com.tbd.DeliveryMedicamentos.services;
 
 import com.tbd.DeliveryMedicamentos.entities.historial_repartidoresEntity;
 import com.tbd.DeliveryMedicamentos.repositories.historial_repartidoresRepository;
+import com.tbd.DeliveryMedicamentos.DTO.RutaFrecuenteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,9 @@ public class historial_repartidoresService {
 
     public void eliminarPorId(String id) {
         repository.deleteById(id);
+    }
+
+    public List<RutaFrecuenteDTO> obtenerRutasFrecuentesUltimos7Dias() {
+        return repository.obtenerRutasFrecuentesUltimos7Dias();
     }
 }
