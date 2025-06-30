@@ -130,46 +130,35 @@
           <!-- Display para la Consulta N°4: Rutas más frecuentes de repartidores -->
           <!-- Display para la Consulta N°4: Rutas más frecuentes de repartidores -->
           <div v-else-if="consultaSeleccionada === '4' && Array.isArray(resultadoConsulta)">
-            <div class="rutas-info">
-              <h3>Rutas más frecuentes en los últimos 7 días</h3>
-              <table class="resultado-table">
-                <thead>
-                  <tr>
-                    <th>Coordenadas</th>
-                    <th>Frecuencia</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(item, index) in resultadoConsulta" :key="index">
-                    <td>({{ item.lat.toFixed(4) }}, {{ item.lng.toFixed(4) }})</td>
-                    <td>{{ item.frecuencia }} visitas</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <h3>Rutas frecuentes de repartidores</h3>
             
-            <!-- 
-            Intento de agregar el mala (salio mal)
-            
-            <div class="mapa-placeholder" v-if="resultadoConsulta.length > 0">
-              <p>🔍 Visualización de mapa (puntos calientes por frecuencia)</p>
-              <div class="puntos-mapa">
-                <div v-for="(item, index) in resultadoConsulta" :key="'map-'+index" 
-                    class="punto-mapa" 
-                    :style="{
-                      'width': (10 + item.frecuencia * 3) + 'px',
-                      'height': (10 + item.frecuencia * 3) + 'px',
-                      'opacity': 0.5 + (item.frecuencia / 12)
-                    }"
-                    :title="`(${item.lat}, ${item.lng}) - Frecuencia: ${item.frecuencia}`">
-                  {{ item.frecuencia }}
+            <div class="rutas-container">
+              <div v-for="(ruta, index) in resultadoConsulta" :key="index" class="ruta-card">
+                <div class="ruta-header">
+                  <span class="frecuencia-badge">{{ ruta.frecuencia }} {{ ruta.frecuencia === 1 ? 'vez' : 'veces' }}</span>
+                  <h4>Ruta {{ index + 1 }}</h4>
+                </div>
+                
+                <div class="coordenadas-list">
+                  <div v-for="(coordenada, idx) in ruta.rutaCodificada.split('|')" :key="idx" class="coordenada-item">
+                    <span class="point-marker">{{ idx + 1 }}</span>
+                    <div class="coordenada-details">
+                      <div>Lat: {{ coordenada.split(',')[0] }}</div>
+                      <div>Lng: {{ coordenada.split(',')[1] }}</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="ruta-summary">
+                  <span>{{ ruta.rutaCodificada.split('|').length }} puntos</span>
+                  <span class="distance-estimate">Distancia aprox: {{ calcularDistancia(ruta.rutaCodificada) }} km</span>
                 </div>
               </div>
             </div>
-            -->
-  
-  <p v-if="resultadoConsulta.length === 0" class="no-results-message">No se encontraron rutas frecuentes en el período.</p>
-</div>
+            
+            <p v-if="resultadoConsulta.length === 0" class="no-results-message">No se encontraron rutas frecuentes.</p>
+          </div>  
+
 
           <!-- Display para la Consulta N°5: Clientes sin compra tras búsqueda -->
           <div v-else-if="consultaSeleccionada === '5' && Array.isArray(resultadoConsulta)">
@@ -302,6 +291,31 @@ const ejecutarConsulta = async () => {
   } finally {
     consultaCargando.value = false;
   }
+};
+
+const calcularDistancia = (rutaCodificada) => {
+  const puntos = rutaCodificada.split('|');
+  if (puntos.length < 2) return 0;
+  
+  let distanciaTotal = 0;
+  
+  for (let i = 1; i < puntos.length; i++) {
+    const [lat1, lng1] = puntos[i-1].split(',').map(Number);
+    const [lat2, lng2] = puntos[i].split(',').map(Number);
+    
+    // Fórmula de Haversine simplificada para distancia aproximada
+    const R = 6371; // Radio de la Tierra en km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+      Math.sin(dLng/2) * Math.sin(dLng/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    distanciaTotal += R * c;
+  }
+  
+  return distanciaTotal.toFixed(2);
 };
 
 // Función para consultar los logs de un pedido específico
@@ -571,6 +585,87 @@ h1 {
 
 .logs-pedido .resultado-table th {
   background-color: #3f51b5; 
+}
+
+.rutas-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.ruta-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  transition: transform 0.2s;
+}
+
+.ruta-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.ruta-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.frecuencia-badge {
+  background-color: #4CAF50;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  margin-right: 10px;
+}
+
+.coordenadas-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.coordenada-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+
+.point-marker {
+  background-color: #2196F3;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-size: 0.8em;
+}
+
+.coordenada-details {
+  flex-grow: 1;
+  font-size: 0.9em;
+}
+
+.ruta-summary {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 10px;
+}
+
+.distance-estimate {
+  font-weight: bold;
+  color: #333;
 }
 
 .logs-pedido .resultado-table tbody tr:hover {

@@ -1,5 +1,6 @@
 package com.tbd.DeliveryMedicamentos.controllers;
 
+import com.tbd.DeliveryMedicamentos.DTO.RutaSecuenciaDTO;
 import com.tbd.DeliveryMedicamentos.entities.historial_repartidoresEntity;
 import com.tbd.DeliveryMedicamentos.services.historial_repartidoresService;
 import com.tbd.DeliveryMedicamentos.DTO.RutaFrecuenteDTO;
@@ -46,7 +47,8 @@ public class historial_repartidoresController {
     }
 
     @GetMapping("/rutas-frecuentes")
-    public List<RutaFrecuenteDTO> obtenerRutasFrecuentesUltimos7Dias() {
-        return service.obtenerRutasFrecuentesUltimos7Dias();
+    public List<RutaSecuenciaDTO> rutasFrecuentes() {
+        return service.obtenerRutasCompletasFrecuentesUltimos7Dias();
     }
+
 }
