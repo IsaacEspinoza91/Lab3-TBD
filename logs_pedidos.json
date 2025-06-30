@@ -32,5 +32,30 @@
                 "timestamp": "2025-03-21T13:20:00"
             }
         ]
+    },
+    {
+        "pedido_id": "P003",
+        "eventos": [
+            {
+                "estado": "creado",
+                "timestamp": "2025-06-30T10:00:00"
+            },
+            {
+                "estado": "paso1",
+                "timestamp": "2025-06-30T10:01:00"
+            },
+            {
+                "estado": "paso2",
+                "timestamp": "2025-06-30T10:02:00"
+            },
+            {
+                "estado": "paso3",
+                "timestamp": "2025-06-30T10:03:00"
+            },
+            {
+                "estado": "finalizado",
+                "timestamp": "2025-06-30T10:04:00"
+            }
+        ]
     }
 ]

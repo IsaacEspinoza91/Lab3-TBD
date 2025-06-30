@@ -13,5 +13,95 @@
                 "timestamp": "2025-03-20T09:06:00"
             }
         ]
+    },
+    {
+        "cliente_id": "C003",
+        "eventos": [
+            {
+                "tipo": "busqueda",
+                "valor": "aspirina",
+                "timestamp": "2025-06-29T10:00:00.000Z"
+            },
+            {
+                "tipo": "vista_producto",
+                "valor": "producto_456",
+                "timestamp": "2025-06-29T10:05:00.000Z"
+            },
+            {
+                "tipo": "busqueda",
+                "valor": "jarabe",
+                "timestamp": "2025-06-29T10:10:00.000Z"
+            }
+        ]
+    },
+    {
+        "cliente_id": "C004",
+        "eventos": [
+            {
+                "tipo": "busqueda",
+                "valor": "vitamina c",
+                "timestamp": "2025-06-29T11:00:00.000Z"
+            },
+            {
+                "tipo": "agregar_carrito",
+                "valor": "prod_vitamc_1",
+                "timestamp": "2025-06-29T11:05:00.000Z"
+            },
+            {
+                "tipo": "compra",
+                "valor": "pedido_XYZ",
+                "timestamp": "2025-06-29T11:10:00.000Z"
+            }
+        ]
+    },
+    {
+        "cliente_id": "C005",
+        "eventos": [
+            {
+                "tipo": "login",
+                "valor": "usuario_C005",
+                "timestamp": "2025-06-29T12:00:00.000Z"
+            },
+            {
+                "tipo": "vista_perfil",
+                "valor": "C005_perfil",
+                "timestamp": "2025-06-29T12:02:00.000Z"
+            }
+        ]
+    },
+    {
+        "cliente_id": "C006",
+        "eventos": [
+            {
+                "tipo": "busqueda",
+                "valor": "analgésico",
+                "timestamp": "2025-06-29T13:00:00.000Z"
+            },
+            {
+                "tipo": "vista_oferta",
+                "valor": "oferta_descuento",
+                "timestamp": "2025-06-29T13:08:00.000Z"
+            }
+        ]
+    },
+    {
+        "cliente_id": "C007",
+        "eventos": [
+            {
+                "tipo": "busqueda",
+                "valor": "crema solar",
+                "timestamp": "2025-06-29T14:00:00.000Z"
+            },
+            {
+                "tipo": "agregar_carrito",
+                "valor": "crema_sol_UV",
+                "timestamp": "2025-06-29T14:05:00.000Z"
+            },
+            {
+                "tipo": "compra",
+                "valor": "pedido_QRS",
+                "timestamp": "2025-06-29T14:12:00.000Z"
+            }
+        ]
     }
 ]

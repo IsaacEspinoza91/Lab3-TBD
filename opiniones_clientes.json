@@ -12,5 +12,19 @@
         "comentario": "Demora en la entrega y mal embalaje.",
         "puntuacion": 2,
         "fecha": "2025-03-21T14:22:00Z"
+    },
+    {
+        "cliente_id": "C003",
+        "empresa_id": "E001",
+        "comentario": "Debe mejorar.",
+        "puntuacion": 3,
+        "fecha": "2025-03-20T13:15:00Z"
+    },
+    {
+        "cliente_id": "C004",
+        "empresa_id": "E002",
+        "comentario": "Bien pero aún puede mejorar.",
+        "puntuacion": 4,
+        "fecha": "2025-03-21T17:22:00Z"
     }
 ]
