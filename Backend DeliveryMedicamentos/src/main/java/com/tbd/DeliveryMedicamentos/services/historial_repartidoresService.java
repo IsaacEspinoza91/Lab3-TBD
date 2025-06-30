@@ -6,6 +6,9 @@ import com.tbd.DeliveryMedicamentos.DTO.RutaFrecuenteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +47,8 @@ public class historial_repartidoresService {
     }
 
     public List<RutaFrecuenteDTO> obtenerRutasFrecuentesUltimos7Dias() {
-        return repository.obtenerRutasFrecuentesUltimos7Dias();
+        Instant haceSieteDias = Instant.now().minus(7, ChronoUnit.DAYS);
+        Date fechaInicio = Date.from(haceSieteDias);
+        return repository.obtenerRutasFrecuentesDesde(fechaInicio);
     }
 }
