@@ -45,6 +45,6 @@ public class navegacion_usuariosService {
 
     // Consulta 5: Detectar clientes que realizaron búsquedas sin concretar pedidos (navegación sin compra).
     public List<ClienteSinCompraDTO> getClientesSinCompraTrasBusqueda() {
-        return repository.findClientesWithSearchAndNoPurchase();
+        return repository.encontrarClientesConBusquedaSinCompra();
     }
 }
