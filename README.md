@@ -31,7 +31,7 @@ Antes de iniciar el backend y frontend, sigue estos pasos para crear y poblar la
 
 --- 
 
-PostgreSQL
+## 🐘 PostgreSQL + PostGIS
 
 ## 1. 💠 Crear la base de datos y activar PostGIS
 
@@ -70,9 +70,9 @@ psql -U <tu_usuario> -d delivery_medicamentos -f Laboratorio_2_Geom_TDB_GRUPO1.s
 🕒 *Nota:* la importación puede tardar entre 2 a 5 minutos.
 
 ---
-MongoDB
+## 🍃 MongoDB
 
-## Pasos previos:
+## Requisitos Previos:
 
 Se espera que el usuario que vaya a probar la aplicación tenga instaladas las siguientes herramientas y agregadas en la variable de entorno del sistema 'PATH'
 de mongoDB:
@@ -86,6 +86,8 @@ MongoDB Command Line Database Tools Download (https://www.mongodb.com/try/downlo
 Inicializar el servicio MongoDB en una terminal CMD con el comando:
 
 > mongod
+> use delivery-med-mongo
+> db.myCollection.insertOne({ name: "example" })
 
 ## 2. Poblar la base de datos
 
