@@ -97,7 +97,9 @@ Inicializar el servicio MongoDB en una terminal CMD con el comando:
 
 ## 2. Poblar la base de datos
 
-Hemos creado un archivo que facilita el poblado de datos llamado "poblado.bat", al hacer doble click en este y se ejecutará el poblado.
+
+Hemos creado un archivo que facilita el poblado de datos llamado "poblado.bat", al hacer doble click en este se ejecutará el poblado.
+
 ---
 
 ## 🚀 Cómo Ejecutar el Proyecto
