@@ -77,9 +77,9 @@ psql -U <tu_usuario> -d delivery_medicamentos -f Laboratorio_2_Geom_TDB_GRUPO1.s
 Se espera que el usuario que vaya a probar la aplicación tenga instaladas las siguientes herramientas y agregadas en la variable de entorno del sistema 'PATH'
 de mongoDB:
 
-MongoDB, incluyendo MongoDB Compass
-MongoDB Shell Download (https://www.mongodb.com/try/download/shell#:~:text=Descarga%20de%20MongoDB%20Shell)
-MongoDB Command Line Database Tools Download (https://www.mongodb.com/try/download/database-tools#:~:text=MongoDB%20Command%20Line%20Database%20Tools%20Download)
+* MongoDB, incluyendo MongoDB Compass
+* MongoDB Shell Download (https://www.mongodb.com/try/download/shell#:~:text=Descarga%20de%20MongoDB%20Shell)
+* MongoDB Command Line Database Tools Download (https://www.mongodb.com/try/download/database-tools#:~:text=MongoDB%20Command%20Line%20Database%20Tools%20Download)
 
 ## 1. 💠 Inicializar la base de datos
 
