@@ -128,25 +128,48 @@
           </div>
 
           <!-- Display para la Consulta N°4: Rutas más frecuentes de repartidores -->
+          <!-- Display para la Consulta N°4: Rutas más frecuentes de repartidores -->
           <div v-else-if="consultaSeleccionada === '4' && Array.isArray(resultadoConsulta)">
-            <table class="resultado-table">
-              <thead>
-                <tr>
-                  <th>ID Repartidor</th>
-                  <th>Ruta (Ej. ID Ruta/Detalle)</th>
-                  <th>Frecuencia</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in resultadoConsulta" :key="index">
-                  <td>{{ item.repartidorId }}</td>
-                  <td>{{ item.ruta }}</td>
-                  <td>{{ item.frecuencia }}</td>
-                </tr>
-              </tbody>
-            </table>
-            <p v-if="resultadoConsulta.length === 0" class="no-results-message">No se encontraron rutas frecuentes.</p>
-          </div>
+            <div class="rutas-info">
+              <h3>Rutas más frecuentes en los últimos 7 días</h3>
+              <table class="resultado-table">
+                <thead>
+                  <tr>
+                    <th>Coordenadas</th>
+                    <th>Frecuencia</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(item, index) in resultadoConsulta" :key="index">
+                    <td>({{ item.lat.toFixed(4) }}, {{ item.lng.toFixed(4) }})</td>
+                    <td>{{ item.frecuencia }} visitas</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- 
+            Intento de agregar el mala (salio mal)
+            
+            <div class="mapa-placeholder" v-if="resultadoConsulta.length > 0">
+              <p>🔍 Visualización de mapa (puntos calientes por frecuencia)</p>
+              <div class="puntos-mapa">
+                <div v-for="(item, index) in resultadoConsulta" :key="'map-'+index" 
+                    class="punto-mapa" 
+                    :style="{
+                      'width': (10 + item.frecuencia * 3) + 'px',
+                      'height': (10 + item.frecuencia * 3) + 'px',
+                      'opacity': 0.5 + (item.frecuencia / 12)
+                    }"
+                    :title="`(${item.lat}, ${item.lng}) - Frecuencia: ${item.frecuencia}`">
+                  {{ item.frecuencia }}
+                </div>
+              </div>
+            </div>
+            -->
+  
+  <p v-if="resultadoConsulta.length === 0" class="no-results-message">No se encontraron rutas frecuentes en el período.</p>
+</div>
 
           <!-- Display para la Consulta N°5: Clientes sin compra tras búsqueda -->
           <div v-else-if="consultaSeleccionada === '5' && Array.isArray(resultadoConsulta)">
@@ -252,7 +275,7 @@ const ejecutarConsulta = async () => {
         break;
       case '4':
         //falta
-        response = await api.get('/repartidores/rutas-frecuentes');
+        response = await api.get('/historial_repartidores/rutas-frecuentes');
         break;
       case '5':
         response = await api.get('/navegacion_usuarios/clientes-sin-compra');
@@ -553,4 +576,51 @@ h1 {
 .logs-pedido .resultado-table tbody tr:hover {
   background-color: #c5cae9; 
 }
+
+.mapa-rutas-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.rutas-info {
+  flex: 1;
+}
+
+.mapa-placeholder {
+  flex: 1;
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+  min-height: 300px;
+}
+
+.puntos-mapa {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: #e9f5ff;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.punto-mapa {
+  position: absolute;
+  background-color: #ff5722;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+/* Posicionamiento aproximado de los puntos (ajustar según necesidad) */
+.punto-mapa:nth-child(1) { top: 30%; left: 20%; }
+.punto-mapa:nth-child(2) { top: 40%; left: 60%; }
+.punto-mapa:nth-child(3) { top: 60%; left: 30%; }
+.punto-mapa:nth-child(4) { top: 70%; left: 50%; }
 </style>

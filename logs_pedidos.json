@@ -57,5 +57,88 @@
                 "timestamp": "2025-06-30T10:04:00"
             }
         ]
+    },
+    {
+        "pedido_id": "P004",
+        "eventos": [
+            {
+                "estado": "creado",
+                "timestamp": "2025-06-29T18:30:00"
+            },
+            {
+                "estado": "en preparación",
+                "timestamp": "2025-06-29T18:35:00"
+            },
+            {
+                "estado": "en reparto",
+                "timestamp": "2025-06-29T18:50:00"
+            },
+            {
+                "estado": "intento fallido",
+                "timestamp": "2025-06-29T19:15:00"
+            },
+            {
+                "estado": "en reparto",
+                "timestamp": "2025-06-29T20:00:00"
+            },
+            {
+                "estado": "entregado",
+                "timestamp": "2025-06-29T20:30:00"
+            }
+        ]
+    },
+    {
+        "pedido_id": "P005",
+        "eventos": [
+            {
+                "estado": "creado",
+                "timestamp": "2025-06-28T12:00:00"
+            },
+            {
+                "estado": "en preparación",
+                "timestamp": "2025-06-28T12:05:00"
+            },
+            {
+                "estado": "retrasado",
+                "timestamp": "2025-06-28T12:30:00"
+            },
+            {
+                "estado": "en preparación",
+                "timestamp": "2025-06-28T12:45:00"
+            },
+            {
+                "estado": "cancelado",
+                "timestamp": "2025-06-28T13:00:00"
+            }
+        ]
+    },
+    {
+        "pedido_id": "P006",
+        "eventos": [
+            {
+                "estado": "creado",
+                "timestamp": "2025-06-30T08:00:00"
+            },
+            {
+                "estado": "verificación",
+                "timestamp": "2025-06-30T08:01:00"
+            },
+            {
+                "estado": "en preparación",
+                "timestamp": "2025-06-30T08:05:00"
+            },
+            {
+                "estado": "en reparto",
+                "timestamp": "2025-06-30T08:20:00"
+            },
+            {
+                "estado": "entregado",
+                "timestamp": "2025-06-30T08:35:00"
+            },
+            {
+                "estado": "calificado",
+                "timestamp": "2025-06-30T09:00:00"
+            }
+        ]
     }
 ]

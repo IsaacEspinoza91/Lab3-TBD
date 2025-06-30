@@ -26,5 +26,47 @@
         "comentario": "Bien pero aún puede mejorar.",
         "puntuacion": 4,
         "fecha": "2025-03-21T17:22:00Z"
+    },
+    {
+        "cliente_id": "C001",
+        "empresa_id": "E002",
+        "comentario": "No llegó lo que pedí, me ofrecieron reembolso.",
+        "puntuacion": 2,
+        "fecha": "2025-03-28T09:00:00Z"
+    },
+    {
+        "cliente_id": "C002",
+        "empresa_id": "E001",
+        "comentario": "Me encanta el servicio, soy cliente frecuente.",
+        "puntuacion": 5,
+        "fecha": "2025-03-28T11:30:00Z"
+    },
+        {
+        "cliente_id": "C001",
+        "empresa_id": "E001",
+        "comentario": "Todo perfecto como siempre.",
+        "puntuacion": 5,
+        "fecha": "2025-03-27T10:10:00Z"
+    },
+    {
+        "cliente_id": "C002",
+        "empresa_id": "E002",
+        "comentario": "Poca información de seguimiento, pero llegó bien.",
+        "puntuacion": 3,
+        "fecha": "2025-03-27T16:45:00Z"
+    },
+        {
+        "cliente_id": "C001",
+        "empresa_id": "E001",
+        "comentario": "Tuve un problema con la dirección, pero lo resolvieron rápido.",
+        "puntuacion": 4,
+        "fecha": "2025-03-24T13:00:00Z"
+    },
+    {
+        "cliente_id": "C002",
+        "empresa_id": "E002",
+        "comentario": "Error en el pedido, recibí otro producto.",
+        "puntuacion": 1,
+        "fecha": "2025-03-25T15:20:00Z"
     }
 ]
