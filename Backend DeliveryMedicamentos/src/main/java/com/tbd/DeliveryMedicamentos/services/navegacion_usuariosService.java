@@ -1,5 +1,6 @@
 package com.tbd.DeliveryMedicamentos.services;
 
+import com.tbd.DeliveryMedicamentos.DTO.ClienteSinCompraDTO;
 import com.tbd.DeliveryMedicamentos.entities.navegacion_usuariosEntity;
 import com.tbd.DeliveryMedicamentos.repositories.navegacion_usuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,10 @@ public class navegacion_usuariosService {
 
     public void eliminarPorId(String id) {
         repository.deleteById(id);
+    }
+
+    // Consulta 5: Detectar clientes que realizaron búsquedas sin concretar pedidos (navegación sin compra).
+    public List<ClienteSinCompraDTO> getClientesSinCompraTrasBusqueda() {
+        return repository.findClientesWithSearchAndNoPurchase();
     }
 }

@@ -1,8 +1,10 @@
 package com.tbd.DeliveryMedicamentos.controllers;
 
+import com.tbd.DeliveryMedicamentos.DTO.ClienteSinCompraDTO;
 import com.tbd.DeliveryMedicamentos.entities.navegacion_usuariosEntity;
 import com.tbd.DeliveryMedicamentos.services.navegacion_usuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,5 +44,12 @@ public class navegacion_usuariosController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable String id) {
         service.eliminarPorId(id);
+    }
+
+    //Consulta 5: Detectar clientes que realizaron búsquedas sin concretar pedidos (navegación sin compra).
+    @GetMapping("/clientes-sin-compra")
+    public ResponseEntity<List<ClienteSinCompraDTO>> getClientesSinCompra() {
+        List<ClienteSinCompraDTO> clientes = service.getClientesSinCompraTrasBusqueda();
+        return ResponseEntity.ok(clientes);
     }
 }
