@@ -83,12 +83,47 @@
           </div>
 
           <!-- Display para la Consulta N°3: Conteo de cambios rápidos -->
-          <div v-else-if="consultaSeleccionada === '3'">
-            <p v-if="typeof resultadoConsulta === 'number'">
-              Cantidad de pedidos con cambios rápidos: <strong>{{ resultadoConsulta }}</strong>
-            </p>
-            <p v-else>
-              Formato de resultado inesperado para Consulta N°3.
+          <div v-else-if="consultaSeleccionada === '3' && Array.isArray(resultadoConsulta)">
+            <p>Cantidad de logs cambiantes registrados: {{ resultadoConsulta.length }}</p>
+
+            <table class="resultado-table">
+              <thead>
+              <tr>
+                <th>ID Pedido</th>
+                <th>Acciones</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="(item, index) in resultadoConsulta" :key="index">
+                <td>{{ item.idpedido }}</td>
+                <td>
+                  <button @click="consultarPedido(item.idpedido)">Consultar</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <!-- sub tabla -->
+            <div v-if="logsPedidoSeleccionado.length > 0" class="logs-pedido">
+              <h4>Logs del Pedido ID: {{ pedidoActual }}</h4>
+              <table class="resultado-table">
+                <thead>
+                <tr>
+                  <th>Estado</th>
+                  <th>Timestamp</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(log, index) in logsPedidoSeleccionado" :key="index">
+                  <td>{{ log.estado }}</td>
+                  <td>{{ log.timestamp }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p v-if="resultadoConsulta.length === 0" class="no-results-message">
+              No se encontraron pedidos.
             </p>
           </div>
 
@@ -171,6 +206,8 @@ const consultaCargando = ref(false);
 const resultadoConsulta = ref(null);
 const errorConsulta = ref(null);
 const palabraClaveOpinion = ref('');
+const logsPedidoSeleccionado = ref([]);
+const pedidoActual = ref(null);
 
 const manejarCambioConsulta = () => {
   resultadoConsulta.value = null;
@@ -203,8 +240,8 @@ const ejecutarConsulta = async () => {
         }
         response = await api.get(`/opiniones_clientes/buscar/${palabraClaveOpinion.value}`);
         break;
-      case '3': //falta
-        response = await api.get('/logs-pedidos/conteo-cambios-rapidos');
+      case '3':
+        response = await api.get('/logs-pedidos/pedidos-cambiantes');
         break;
       case '4': //falta
         response = await api.get('/repartidores/rutas-frecuentes');
@@ -230,6 +267,18 @@ const ejecutarConsulta = async () => {
     consultaCargando.value = false;
   }
 };
+
+const consultarPedido = async (idpedido) => {
+  try {
+    const response = await api.get(`/logs_pedidos/pedido/${idpedido}`);
+    logsPedidoSeleccionado.value = response.data;
+    pedidoActual.value = idpedido;
+  } catch (error) {
+    console.error(`Error al consultar logs_pedidos ${idpedido}:`, error);
+    errorConsulta.value = error.response?.data?.message || 'Error al consultar logs del pedido.';
+  }
+};
+
 </script>
 
 <style scoped>
