@@ -84,40 +84,40 @@
 
           <!-- Display para la Consulta N°3: Conteo de cambios rápidos -->
           <div v-else-if="consultaSeleccionada === '3' && Array.isArray(resultadoConsulta)">
-            <p>Cantidad de logs cambiantes registrados: {{ resultadoConsulta.length }}</p>
+            <p>Pedidos con más de 3 cambios de estado en menos de 10 minutos: <strong>{{ resultadoConsulta.length }}</strong></p>
 
             <table class="resultado-table">
               <thead>
-              <tr>
-                <th>ID Pedido</th>
-                <th>Acciones</th>
-              </tr>
+                <tr>
+                  <th>ID Pedido</th>
+                  <th>Acciones</th>
+                </tr>
               </thead>
               <tbody>
-              <tr v-for="(item, index) in resultadoConsulta" :key="index">
-                <td>{{ item.idpedido }}</td>
-                <td>
-                  <button @click="consultarPedido(item.idpedido)">Consultar</button>
-                </td>
-              </tr>
+                <tr v-for="(item, index) in resultadoConsulta" :key="index">
+                  <td>{{ item }}</td>
+                  <td>
+                    <button @click="consultarPedido(item)">Consultar Logs</button>
+                  </td>
+                </tr>
               </tbody>
             </table>
 
-            <!-- sub tabla -->
+            <!-- sub tabla para logs de un pedido específico -->
             <div v-if="logsPedidoSeleccionado.length > 0" class="logs-pedido">
               <h4>Logs del Pedido ID: {{ pedidoActual }}</h4>
               <table class="resultado-table">
                 <thead>
-                <tr>
-                  <th>Estado</th>
-                  <th>Timestamp</th>
-                </tr>
+                  <tr>
+                    <th>Estado</th>
+                    <th>Timestamp</th>
+                  </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(log, index) in logsPedidoSeleccionado" :key="index">
-                  <td>{{ log.estado }}</td>
-                  <td>{{ log.timestamp }}</td>
-                </tr>
+                  <tr v-for="(log, index) in logsPedidoSeleccionado" :key="index">
+                    <td>{{ log.estado }}</td>
+                    <td>{{ log.timestamp }}</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -177,7 +177,7 @@
               </thead>
               <tbody>
                 <tr v-for="(item, index) in resultadoConsulta" :key="index">
-                  <td>{{ item.hora }}</td> 
+                  <td>{{ item.hora }}</td>
                   <td>{{ parseFloat(item.promedioPuntuacion).toFixed(2) }}</td>
                   <td>{{ item.totalOpiniones }}</td>
                 </tr>
@@ -186,6 +186,7 @@
             <p v-if="resultadoConsulta.length === 0" class="no-results-message">No se encontraron patrones de satisfacción por hora.</p>
           </div>
 
+          <!-- Un display genérico para cualquier otro resultado JSON -->
           <pre v-else>{{ JSON.stringify(resultadoConsulta, null, 2) }}</pre>
         </div>
 
@@ -212,8 +213,14 @@ const pedidoActual = ref(null);
 const manejarCambioConsulta = () => {
   resultadoConsulta.value = null;
   errorConsulta.value = null;
+  // Limpiar estados específicos de la Consulta N°3 al cambiar de consulta
+  logsPedidoSeleccionado.value = [];
+  pedidoActual.value = null;
+
   if (consultaSeleccionada.value === '2') {
+    // Para la consulta 2, el usuario debe ingresar la palabra clave y luego ejecutar.
   } else {
+    // Para las demás consultas, ejecutar inmediatamente al seleccionar.
     ejecutarConsulta();
   }
 };
@@ -241,9 +248,10 @@ const ejecutarConsulta = async () => {
         response = await api.get(`/opiniones_clientes/buscar/${palabraClaveOpinion.value}`);
         break;
       case '3':
-        response = await api.get('/logs-pedidos/pedidos-cambiantes');
+        response = await api.get('/logs_pedidos/pedidos-cambiantes');
         break;
-      case '4': //falta
+      case '4':
+        //falta
         response = await api.get('/repartidores/rutas-frecuentes');
         break;
       case '5':
@@ -262,26 +270,49 @@ const ejecutarConsulta = async () => {
 
   } catch (error) {
     console.error('Error al ejecutar consulta del Lab3:', error);
-    errorConsulta.value = error.response?.data?.message || 'Error al ejecutar la consulta.';
+    // Manejo de errores específico para el 403 Forbidden
+    if (error.response && error.response.status === 403) {
+      errorConsulta.value = 'Acceso denegado. Por favor, asegúrese de estar autenticado y tener los permisos necesarios.';
+    } else {
+      errorConsulta.value = error.response?.data?.message || 'Error al ejecutar la consulta.';
+    }
   } finally {
     consultaCargando.value = false;
   }
 };
 
+// Función para consultar los logs de un pedido específico
 const consultarPedido = async (idpedido) => {
   try {
     const response = await api.get(`/logs_pedidos/pedido/${idpedido}`);
-    logsPedidoSeleccionado.value = response.data;
-    pedidoActual.value = idpedido;
+    console.log('Respuesta completa del backend para el pedido:', response.data);
+    if (Array.isArray(response.data) && response.data.length > 0) {
+        logsPedidoSeleccionado.value = response.data[0].eventos;
+        console.log('Eventos extraídos (asumiendo array[0].eventos):', logsPedidoSeleccionado.value);
+    } else if (response.data && response.data.eventos) {
+        logsPedidoSeleccionado.value = response.data.eventos;
+        console.log('Eventos extraídos (asumiendo objeto.eventos):', logsPedidoSeleccionado.value);
+    } else {
+        logsPedidoSeleccionado.value = [];
+        console.warn('Estructura de respuesta inesperada para los logs del pedido. response.data:', response.data);
+    }
+
+    pedidoActual.value = idpedido; 
+
+
   } catch (error) {
-    console.error(`Error al consultar logs_pedidos ${idpedido}:`, error);
-    errorConsulta.value = error.response?.data?.message || 'Error al consultar logs del pedido.';
+    console.error(`Error al consultar logs del pedido ${idpedido}:`, error);
+    if (error.response && error.response.status === 403) {
+      errorConsulta.value = 'Acceso denegado para consultar los logs del pedido. Por favor, inicie sesión.';
+    } else {
+      errorConsulta.value = error.response?.data?.message || 'Error al consultar logs del pedido.';
+    }
   }
 };
-
 </script>
 
 <style scoped>
+/* Tu CSS existente */
 .lab3-dashboard {
   padding: 2rem;
   background-color: #f0f2f5;
@@ -496,5 +527,30 @@ h1 {
   outline: none;
   border-color: #1a237e;
   box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.2);
+}
+
+/* Nuevos estilos para la sub-tabla de logs */
+.logs-pedido {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #e8eaf6; 
+  border-radius: 10px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logs-pedido h4 {
+  color: #1a237e;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.logs-pedido .resultado-table th {
+  background-color: #3f51b5; 
+}
+
+.logs-pedido .resultado-table tbody tr:hover {
+  background-color: #c5cae9; 
 }
 </style>
