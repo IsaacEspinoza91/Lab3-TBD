@@ -74,8 +74,7 @@ psql -U <tu_usuario> -d delivery_medicamentos -f Laboratorio_2_Geom_TDB_GRUPO1.s
 
 ## Requisitos Previos:
 
-Se espera que el usuario que vaya a probar la aplicación tenga instaladas las siguientes herramientas y agregadas en la variable de entorno del sistema 'PATH'
-de mongoDB:
+Se espera que el usuario que vaya a probar la aplicación tenga instaladas las siguientes herramientas y agregadas en la variable de entorno del sistema 'PATH'.
 
 * MongoDB, incluyendo MongoDB Compass
 * MongoDB Shell Download (https://www.mongodb.com/try/download/shell#:~:text=Descarga%20de%20MongoDB%20Shell)
